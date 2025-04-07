@@ -77,7 +77,7 @@ export default function HeroSection() {
               production. Fast, simple, and reliable.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
-              <Link href="/signup" passHref>
+              <Link href="/sign-up" passHref>
                 <Button
                   size="lg"
                   className="bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white border-0 font-semibold"
@@ -85,7 +85,7 @@ export default function HeroSection() {
                   Get Started Free
                 </Button>
               </Link>
-              <Link href="/login" passHref>
+              <Link href="/sign-in" passHref>
                 <Button
                   size="lg"
                   variant="outline"
