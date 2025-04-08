@@ -1,5 +1,4 @@
 import type React from "react";
-import Navbar from "@/components/landing/navbar";
 import DashboardSidebar from "@/components/dashboard/sidebar";
 import MobileNav from "@/components/dashboard/mobile-nav";
 import { SidebarProvider } from "@/components/ui/sidebar";

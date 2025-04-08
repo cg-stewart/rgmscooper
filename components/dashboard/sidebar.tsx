@@ -2,8 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Home, Music, Settings, PlusCircle } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Home, Music } from "lucide-react";
 import {
   Sidebar,
   SidebarContent,

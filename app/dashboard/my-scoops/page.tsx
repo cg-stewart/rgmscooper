@@ -30,8 +30,19 @@ import {
   RefreshCw,
 } from "lucide-react";
 
+// Define the type for a scoop item
+interface Scoop {
+  requestId: string;
+  status: "COMPLETED" | "PROCESSING" | "QUEUED" | "FAILED";
+  videoTitle: string;
+  youtubeUrl: string;
+  createdAt: string;
+  updatedAt: string;
+  errorMessage: string | null;
+}
+
 // Sample data based on the provided JSON structure
-const initialScoops = [
+const initialScoops: Scoop[] = [
   {
     requestId: "a1b2c3d4-e5f6-7890-1234-abcdef123456",
     status: "COMPLETED",
@@ -80,7 +91,7 @@ const initialScoops = [
 ];
 
 export default function MyScoopsPage() {
-  const [scoops, setScoops] = useState(initialScoops);
+  const [scoops, setScoops] = useState<Scoop[]>(initialScoops); // Use the Scoop[] type
   const [searchTerm, setSearchTerm] = useState("");
 
   // Filter scoops based on search term
@@ -100,7 +111,8 @@ export default function MyScoopsPage() {
   };
 
   // Get status badge color
-  const getStatusBadge = (status: string) => {
+  const getStatusBadge = (status: Scoop["status"]) => {
+    // Use the status type from Scoop
     switch (status) {
       case "COMPLETED":
         return (
@@ -119,9 +131,22 @@ export default function MyScoopsPage() {
       case "FAILED":
         return <Badge className="bg-red-500 hover:bg-red-600">Failed</Badge>;
       default:
+        // This case should ideally not be reached if status type is enforced
         return <Badge>{status}</Badge>;
     }
   };
+
+  // --- Function to handle deleting a scoop ---
+  const handleDeleteScoop = (requestIdToDelete: string) => {
+    // Update the state by filtering out the scoop with the matching requestId
+    setScoops((prevScoops) =>
+      prevScoops.filter((scoop) => scoop.requestId !== requestIdToDelete),
+    );
+    // In a real application, you would also make an API call here
+    // to delete the item on the server.
+    console.log("Deleted scoop:", requestIdToDelete);
+  };
+  // --- End of new function ---
 
   return (
     <div className="space-y-6 w-full">
@@ -233,6 +258,8 @@ export default function MyScoopsPage() {
                         <DropdownMenuItem
                           disabled={scoop.status !== "COMPLETED"}
                           className="flex items-center cursor-pointer"
+                          // Add onSelect={(e) => e.preventDefault()} if needed
+                          // to prevent menu closing immediately on complex actions
                         >
                           <Download className="mr-2 h-4 w-4" />
                           Download
@@ -247,15 +274,22 @@ export default function MyScoopsPage() {
                         <DropdownMenuItem
                           disabled={scoop.status === "PROCESSING"}
                           className="flex items-center cursor-pointer"
+                          // onClick={() => handleRetry(scoop.requestId)} // Example for retry
                         >
                           <RefreshCw className="mr-2 h-4 w-4" />
                           Retry
                         </DropdownMenuItem>
                         <DropdownMenuSeparator />
-                        <DropdownMenuItem className="flex items-center text-red-600 cursor-pointer">
+                        {/* --- Add onClick handler to Delete menu item --- */}
+                        <DropdownMenuItem
+                          className="flex items-center text-red-600 cursor-pointer"
+                          onClick={() => handleDeleteScoop(scoop.requestId)}
+                          // Add onSelect={(e) => e.preventDefault()} if you add a confirmation dialog
+                        >
                           <Trash2 className="mr-2 h-4 w-4" />
                           Delete
                         </DropdownMenuItem>
+                        {/* --- End of change --- */}
                       </DropdownMenuContent>
                     </DropdownMenu>
                   </TableCell>
@@ -270,6 +304,7 @@ export default function MyScoopsPage() {
         <Button
           variant="outline"
           className="border-emerald-200 text-emerald-600 hover:bg-emerald-50 hover:text-emerald-700 dark:border-emerald-800 dark:text-emerald-400 dark:hover:bg-emerald-900/20"
+          // onClick={handleLoadMore} // Example for load more
         >
           Load More
         </Button>

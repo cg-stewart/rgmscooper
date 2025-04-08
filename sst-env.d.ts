@@ -13,7 +13,7 @@ declare module "sst" {
       "type": "sst.sst.Secret"
       "value": string
     }
-    "CLERKSIGININURL": {
+    "CLERKSIGNINURL": {
       "type": "sst.sst.Secret"
       "value": string
     }

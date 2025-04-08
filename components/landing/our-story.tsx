@@ -24,7 +24,8 @@ export default function OurStory() {
           <p className="mt-6 text-gray-600 dark:text-gray-400 text-lg font-semibold">
             RGMScooper was born out of necessity. As rap and pop musicians, we
             needed a reliable way to download audio from YouTube for our own
-            projects. We built this tool to solve our own problem, and now we're
+            projects. We built this tool to solve our own problem, and now
+            we&apos;re {/* Changed ' to &apos; */}
             sharing it with fellow creators.
           </p>
           <p className="mt-4 text-gray-600 dark:text-gray-400 text-lg font-semibold">

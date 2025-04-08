@@ -13,7 +13,7 @@ export default $config({
   async run() {
     const clerkPubKey = new sst.Secret("NEXTPUBLICKEY");
     const clerkSecretKey = new sst.Secret("CLERKSECRETKEY");
-    const clerkSiginInUrl = new sst.Secret("CLERKSIGININURL");
+    const clerkSiginInUrl = new sst.Secret("CLERKSIGNINURL");
     const clerkSignUpUrl = new sst.Secret("CLERKSIGNUPURL");
     const clerkFallbackUrl = new sst.Secret("CLERKFALLBACKURL");
 
